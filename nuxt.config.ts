@@ -21,9 +21,9 @@ export default defineNuxtConfig({
       title: 'Seth Rothbaum',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Seth Rothbaum — ML researcher. Research, experience, and contact.' },
+        { name: 'description', content: 'Seth Rothbaum - ML Researcher' },
         { property: 'og:title', content: 'Seth Rothbaum' },
-        { property: 'og:description', content: 'Seth Rothbaum — ML researcher. Research, experience, and contact.' },
+        { property: 'og:description', content: 'Seth Rothbaum - ML Researcher' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://srothbaum.github.io/' },
         // Absolute URL is required — scrapers do not resolve relative paths.
@@ -38,12 +38,16 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/sr.svg' },
         { rel: 'canonical', href: 'https://srothbaum.github.io/' },
       ],
-      // Applies the saved theme before first paint. Pages are prerendered with no cookie,
-      // so without this the site would always paint light and only correct itself later.
+      // Applies the theme before first paint. Pages are prerendered with no cookie, so
+      // without this the site would always paint light and only correct itself later.
+      // Must stay in step with composables/useTheme.ts: an explicit cookie wins, and an
+      // absent one falls back to the OS setting.
       script: [
         {
           innerHTML:
-            "try{if(/(?:^|;\\s*)theme-dark=true/.test(document.cookie))document.documentElement.classList.add('dark')}catch(e){}",
+            "try{var m=document.cookie.match(/(?:^|;\\s*)theme-dark=(true|false)/);" +
+            "var d=m?m[1]==='true':matchMedia('(prefers-color-scheme: dark)').matches;" +
+            "if(d)document.documentElement.classList.add('dark')}catch(e){}",
           tagPosition: 'head',
         },
       ],
