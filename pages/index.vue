@@ -27,11 +27,13 @@ const links = [
         aria-label="Toggle theme"
         @click="isDarkMode = !isDarkMode"
       >
-        <svg v-if="isDarkMode" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Both icons always render; CSS picks one. A v-if on the theme would differ from
+             the prerendered markup and cause a hydration mismatch. -->
+        <svg class="hidden dark:block" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5" />
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
         </svg>
-        <svg v-else width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="block dark:hidden" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
       </button>
@@ -58,7 +60,8 @@ const links = [
       </div>
     </div>
 
-    <div class="relative h-[50vh] w-full md:h-auto md:min-h-screen md:w-1/2">
+    <!-- Background matches the shader's colorBack so there is no white flash before the canvas paints. -->
+    <div class="relative h-[50vh] w-full bg-white md:h-auto md:min-h-screen md:w-1/2 dark:bg-black">
       <ClientOnly>
         <DitheringShader
           :color-back="isDarkMode ? 'hsl(0, 0%, 0%)' : 'hsl(0,0%,100%)'"
