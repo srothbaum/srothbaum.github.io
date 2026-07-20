@@ -2,7 +2,7 @@
 // Shared with index.vue; persisted so it survives reloads. See composables/useTheme.ts.
 const isDarkMode = useTheme()
 
-useHead({ title: 'Research — Seth Rothbaum' })
+useHead({ title: 'Research - Seth Rothbaum' })
 
 const research: {
   title: string
