@@ -20,12 +20,10 @@ const links = [
 <template>
   <div class="relative flex min-h-screen flex-col overflow-hidden md:flex-row">
     <div
-      class="relative z-10 flex min-h-screen w-full flex-col p-8 font-mono md:min-h-0 md:w-1/2"
-      :class="isDarkMode ? 'bg-black text-white' : 'bg-white text-black'"
+      class="relative z-10 flex min-h-screen w-full flex-col bg-white p-8 font-mono text-black md:min-h-0 md:w-1/2 dark:bg-black dark:text-white"
     >
       <button
-        class="absolute right-8 top-8 rounded-full p-2 transition-colors"
-        :class="isDarkMode ? 'hover:bg-white/10' : 'hover:bg-black/10'"
+        class="absolute right-8 top-8 rounded-full p-2 transition-colors hover:bg-black/10 dark:hover:bg-white/10"
         aria-label="Toggle theme"
         @click="isDarkMode = !isDarkMode"
       >

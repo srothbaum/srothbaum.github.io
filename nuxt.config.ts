@@ -32,6 +32,15 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/sr.svg' },
         { rel: 'canonical', href: 'https://srothbaum.github.io/' },
       ],
+      // Applies the saved theme before first paint. Pages are prerendered with no cookie,
+      // so without this the site would always paint light and only correct itself later.
+      script: [
+        {
+          innerHTML:
+            "try{if(/(?:^|;\\s*)theme-dark=true/.test(document.cookie))document.documentElement.classList.add('dark')}catch(e){}",
+          tagPosition: 'head',
+        },
+      ],
     },
   },
 })
