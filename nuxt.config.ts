@@ -26,7 +26,13 @@ export default defineNuxtConfig({
         { property: 'og:description', content: 'Seth Rothbaum — ML researcher. Research, experience, and contact.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://srothbaum.github.io/' },
-        { name: 'twitter:card', content: 'summary' },
+        // Absolute URL is required — scrapers do not resolve relative paths.
+        { property: 'og:image', content: 'https://srothbaum.github.io/og.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: 'seth.cv' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: 'https://srothbaum.github.io/og.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/sr.svg' },
